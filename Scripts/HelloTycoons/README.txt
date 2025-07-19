@@ -1,33 +1,43 @@
 # Hello Tycoons
 
-A minimal example script for OpenTTD Game Scripts, designed to showcase how to send messages and interact with the game world in multiple ways.
+## ❓ Description
 
-This script outputs **"Hello Tycoons!"** to:
-- The game log
-- The in-game news feed
-- A sign placed at the center of the map
-- The first company's name (if present)
-
-It's ideal as a **starting point** or **template** for new Game Script developers.
+A minimal example script for OpenTTD Game Scripts, designed to showcase how to send messages and interact with the game world in multiple ways. It’s ideal as a **starting point** or **template** for new Game Script developers.
 
 ---
 
 ## ✨ Features
+
 - ✔️ Logs a message via `GSLog`
 - ✔️ Posts a general news item to all players
 - ✔️ Places a sign in the centre of the map
 - ✔️ Renames the first company to `"Hello Tycoon Company"`
 
-This demonstrates core use of:
-- `GSLog.Info()`
-- `GSNews.Create()`
-- `GSSign.BuildSign()`
-- `GSCompany.SetName()`
-- `GSMap` and `GSText` basics
+---
+
+## 🧠 How It Works
+
+When the script starts, it executes a `PostInit()` function that:
+1. Sends `"Hello Tycoons!"` to the game log using `GSLog.Info()`
+2. Posts the same message to the in-game news feed using `GSNews.Create()`
+3. Places a sign in the middle of the map using `GSSign.BuildSign()`
+4. Renames the first company (if it exists) using `GSCompany.SetName()`
+
+These actions use core OpenTTD GameScript functions like `GSMap`, `GSText`, and `GSCompanyMode`.
 
 ---
 
-## 🚀 Getting Started
+## 📦 What's It For?
+
+This script is best suited for:
+- Learning the basics of OpenTTD GameScript development
+- Testing message output and map interaction features
+- Creating a personal Game Script template or boilerplate
+- Demonstrating community mods or beginner tutorials
+
+---
+
+## 🔧 Installation
 1. Place the `HelloTycoons` folder into your `OpenTTD\content_download\game` directory
 2. Launch OpenTTD → Game Script Settings → Select Game Script → Choose **Hello Tycoons**
 3. Start a new game — you’ll see greetings appear automatically:
@@ -38,10 +48,14 @@ This demonstrates core use of:
 
 ---
 
-## 🛠️ License
+## ✅ Usage & License
 
-MIT License — free to use, extend, and remix  
-Contributions welcome!
+You are welcome to:
+- Copy, modify, or expand this script
+- Use it for public or private projects
+- Share it with credit to Master Hellish
+
+**Disclaimer:** Use at your own risk. No guarantees or warranties are provided.
 
 ---
 
@@ -49,3 +63,5 @@ Contributions welcome!
 
 **Master Hellish**  
 Part of the [Master Hellish Modding Projects](https://github.com/MasterHellish)
+Part of the [Master Hellish Links](https://linktr.ee/masterhellish)
+
