@@ -1,6 +1,7 @@
 class MainClass extends GSController
 {
-	_load_data = null;
+	_loaded_data = null;
+	data = null; //data to save
 	last_year = 0;
 	stat_bankrupt = 0;
 	stat_crashes = 0;
@@ -16,6 +17,8 @@ function MainClass::Start()
 {
 	this.Sleep(1); // Let the game initialize first
 
+	this.Init();
+
 	// Main loop – runs once per day
 	while (true) {
 		local loopStartTick = GSController.GetTick();
@@ -23,6 +26,18 @@ function MainClass::Start()
 		this.HandleEvents(); // Process incoming events
 		this.DoLoop();       // Your main game logic
 
+	}
+}
+
+function MainClass::Init()
+{
+	if (this._loaded_data != null) {
+		this.last_year = this._loaded_data["last_year"];
+		this.stat_bankrupt = this._loaded_data["stat_bankrupt"];
+		this.stat_crashes = this._loaded_data["stat_crashes"];
+		GSLog.Info("Loaded last_year: " + this.last_year);
+		GSLog.Info("Loaded crashes: " + this.stat_crashes);
+		GSLog.Info("Loaded bankruptcies: " + this.stat_bankrupt);
 	}
 }
 
@@ -68,5 +83,21 @@ function MainClass::HandleEvents()
 				break;
 			}
 		}
+	}
+}
+
+function MainClass::Save() {
+	this.data = {
+		last_year = this.last_year,
+		stat_bankrupt = this.stat_bankrupt,
+		stat_crashes = this.stat_crashes,
+	};
+	return this.data;
+}
+
+function MainClass::Load(version, tbl) {
+	this._loaded_data = {}
+   	foreach(key, val in tbl) {
+		this._loaded_data.rawset(key, val);
 	}
 }
