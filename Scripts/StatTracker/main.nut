@@ -35,7 +35,7 @@ function MainClass::Init()
 		this.last_year = this._loaded_data["last_year"];
 		this.stat_bankrupt = this._loaded_data["stat_bankrupt"];
 		this.stat_crashes = this._loaded_data["stat_crashes"];
-		GSLog.Info("Loaded last_year: " + this.last_year);
+		GSLog.Info("Loaded last year: " + this.last_year);
 		GSLog.Info("Loaded crashes: " + this.stat_crashes);
 		GSLog.Info("Loaded bankruptcies: " + this.stat_bankrupt);
 	}
