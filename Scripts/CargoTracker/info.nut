@@ -2,7 +2,7 @@ class FMainClass extends GSInfo {
 	function GetAuthor()		{ return "Master Hellish"; }
 	function GetName()			{ return "MH Cargo Tracker"; }
 	function GetDescription() {
-	    return "Tracks the amount of a particular cargo delivered to a town closest to a company's HQ in a league table.";
+		return "Tracks how much of a chosen cargo is delivered to the town nearest each company's HQ, shown in a league table."
 	}
 	function GetVersion()		{ return 1; }
 	function GetDate()			{ return "2025/08/15"; }

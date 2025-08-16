@@ -1,7 +1,5 @@
 class MainClass extends GSController
 {
-	_load_data = null;
-
 	game_was_loaded=0;
 	last_month = 0;
 
@@ -9,7 +7,7 @@ class MainClass extends GSController
 	cargo_id = 0;
 
 	// Data
-	company_deliverd_cargo = {};
+	company_delivered_cargo = {};
 	company_names = {};
 
 	// League table
@@ -44,9 +42,9 @@ function MainClass::Start()
 
 function MainClass::Init()
 {
-	GSLog.Info("****************************");
-	GSLog.Info("*** Master Hellish Cargo Tracker ***");
-	GSLog.Info("****************************");
+	GSLog.Info("*********************");
+	GSLog.Info("*** MH Cargo Tracker ***");
+	GSLog.Info("*********************");
 	GSLog.Info("");
 
 	this.cargo_id = GSController.GetSetting("cargo_id");
@@ -60,11 +58,11 @@ function MainClass::Init()
     }
 	GSLog.Info("");
 
-	if (!game_was_loaded) {
+	if (!this.game_was_loaded) {
 		// Create the league table
 		this.table_id = GSLeagueTable.New(
 			GSText(GSText.STR_TABLE_TITLE),
-			GSText(GSText.STR_CARGO_TRACKED, 1 << cargo_id),
+			GSText(GSText.STR_CARGO_TRACKED, 1 << this.cargo_id),
 			""
 		);
 	};
@@ -107,7 +105,7 @@ function MainClass::HandleEvents()
 					company_id // link_target
 				);
 
-				this.company_deliverd_cargo[company_id] <- 0;
+				this.company_delivered_cargo[company_id] <- 0;
 				this.company_names[company_id] <- company_name;
 
 				GSGoal.Question(
@@ -123,12 +121,12 @@ function MainClass::HandleEvents()
 			case GSEvent.ET_COMPANY_BANKRUPT : {
 				local bankrupt_company_event = GSEventCompanyBankrupt.Convert(event);
 				local company_id = bankrupt_company_event.GetCompanyID()
-				GSLog.Info("Company " + this.company_names[company_id] + " went bankrupt. They had a score of: " + this.company_deliverd_cargo[company_id]);
+				GSLog.Info("Company " + this.company_names[company_id] + " went bankrupt. They had a score of: " + this.company_delivered_cargo[company_id]);
 				GSLeagueTable.RemoveElement(
 					this.company_league_table_element_ids[company_id]
 				);
 				delete this.company_league_table_element_ids[company_id]
-				delete this.company_deliverd_cargo[company_id]
+				delete this.company_delivered_cargo[company_id]
 				delete this.company_names[company_id]
 				break;
 			}
@@ -136,12 +134,12 @@ function MainClass::HandleEvents()
 			case GSEvent.ET_COMPANY_MERGER : {
 				local merger_company_event = GSEventCompanyMerger.Convert(event);
 				local company_id = merger_company_event.GetOldCompanyID()
-				GSLog.Info("Company " + this.company_names[company_id] + " got bought out. They had a score of: " + this.company_deliverd_cargo[company_id]);
+				GSLog.Info("Company " + this.company_names[company_id] + " got bought out. They had a score of: " + this.company_delivered_cargo[company_id]);
 				GSLeagueTable.RemoveElement(
 					this.company_league_table_element_ids[company_id]
 				);
 				delete this.company_league_table_element_ids[company_id]
-				delete this.company_deliverd_cargo[company_id]
+				delete this.company_delivered_cargo[company_id]
 				delete this.company_names[company_id]
 				break;
 			}
@@ -157,7 +155,7 @@ function MainClass::DoDayLoop()
 		return;
 	}
 	this.last_month = current_month;
-	DoMonthLoop();
+	this.DoMonthLoop();
 }
 
 function MainClass::DoMonthLoop()
@@ -197,13 +195,13 @@ function MainClass::DoMonthLoop()
 			// GSLog.Info(company_name + " delivered " + cargo_delivery_amount);
 
 			// Update the league table
-			local previous_deliverd_cargo = this.company_deliverd_cargo[company_id];
+			local previous_deliverd_cargo = this.company_delivered_cargo[company_id];
 			local new_cargo_delivery_amount = previous_deliverd_cargo + cargo_delivery_amount;
-			this.company_deliverd_cargo[company_id] <- new_cargo_delivery_amount;
+			this.company_delivered_cargo[company_id] <- new_cargo_delivery_amount;
 			GSLeagueTable.UpdateElementScore(
 				this.company_league_table_element_ids[company_id],
-				this.company_deliverd_cargo[company_id],
-				"" + this.company_deliverd_cargo[company_id]
+				this.company_delivered_cargo[company_id],
+				"" + this.company_delivered_cargo[company_id]
 			);
 		}
 	}
@@ -215,7 +213,7 @@ function MainClass::Save() {
 		sv_cargo_id = this.cargo_id,
 		sv_last_month = this.last_month,
 		sv_table_id = this.table_id,
-		sv_company_deliverd_cargo = this.company_deliverd_cargo,
+		sv_company_delivered_cargo = this.company_delivered_cargo,
 		sv_company_league_table_element_ids = this.company_league_table_element_ids,
 		sv_company_names = this.company_names
 	};
@@ -227,7 +225,7 @@ function MainClass::Load(version, data) {
 		if (key == "sv_cargo_id" ) this.cargo_id = val;
 		if (key == "sv_last_month") this.last_month = val;
 		if (key == "sv_table_id") this.table_id = val;
-		if (key == "sv_company_deliverd_cargo") this.company_deliverd_cargo = val;
+		if (key == "sv_company_delivered_cargo") this.company_delivered_cargo = val;
 		if (key == "sv_company_league_table_element_ids") this.company_league_table_element_ids = val;
 		if (key == "sv_company_names") this.company_names = val;
 	}
