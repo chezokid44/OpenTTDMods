@@ -1,21 +1,21 @@
 # Hello Tycoons
 
-## ❓ Description
+## Description
 
 A minimal example script for OpenTTD Game Scripts, designed to showcase how to send messages and interact with the game world in multiple ways. It’s ideal as a **starting point** or **template** for new Game Script developers.
 
 ---
 
-## ✨ Features
+## Features
 
-- ✔️ Logs a message via `GSLog`
-- ✔️ Posts a general news item to all players
-- ✔️ Places a sign in the centre of the map
-- ✔️ Renames the first company to `"Hello Tycoon Company"`
+- Logs a message via `GSLog`
+- Posts a general news item to all players
+- Places a sign in the centre of the map
+- Renames the first company to `"Hello Tycoon Company"`
 
 ---
 
-## 🧠 How It Works
+## How It Works
 
 When the script starts, it executes a `PostInit()` function that:
 1. Sends `"Hello Tycoons!"` to the game log using `GSLog.Info()`
@@ -27,7 +27,7 @@ These actions use core OpenTTD GameScript functions like `GSMap`, `GSText`, and 
 
 ---
 
-## 📦 What's It For?
+## What's It For?
 
 This script is best suited for:
 - Learning the basics of OpenTTD GameScript development
@@ -37,7 +37,7 @@ This script is best suited for:
 
 ---
 
-## 🔧 Installation
+## Installation
 1. Place the `HelloTycoons` folder into your `OpenTTD\content_download\game` directory
 2. Launch OpenTTD → Game Script Settings → Select Game Script → Choose **Hello Tycoons**
 3. Start a new game — you’ll see greetings appear automatically:
@@ -48,7 +48,7 @@ This script is best suited for:
 
 ---
 
-## ✅ Usage & License
+## Usage & License
 
 You are welcome to:
 - Copy, modify, or expand this script
@@ -59,7 +59,7 @@ You are welcome to:
 
 ---
 
-## 🙌 Created By
+## Created By
 
 **Master Hellish**  
 Part of the [Master Hellish Modding Projects](https://github.com/MasterHellish)
