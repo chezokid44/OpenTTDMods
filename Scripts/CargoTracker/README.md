@@ -1,21 +1,21 @@
 # MH Cargo Tracker
 
-## ❓ Description
+## Description
 Cargo Tracker is a Game Script for OpenTTD that measures how much of a chosen cargo type each company delivers.  
 The amount is tracked for the town nearest to that company’s headquarters, and the results are displayed in a league table.
 
 ---
 
-## ✨ Features
-- 📊 Automatic league table ranking companies by delivered cargo  
-- 🏙 Tracks deliveries to the town closest to each company HQ  
-- ⚙️ Configurable cargo type (set via script settings)  
-- 💾 Save/load support – continues tracking across saved games  
-- 🚨 Handles company events: new companies, bankruptcies, and mergers  
+## Features
+- Automatic league table ranking companies by delivered cargo  
+- Tracks deliveries to the town closest to each company HQ  
+- Configurable cargo type (set via script settings)  
+- Save/load support – continues tracking across saved games  
+- Handles company events: new companies, bankruptcies, and mergers  
 
 ---
 
-## 🧠 How It Works
+## How It Works
 - Each in-game month, the script checks every company’s HQ  
 - It finds the nearest town to that HQ  
 - Using the cargo monitor, it calculates how much of the chosen cargo was delivered there  
@@ -24,7 +24,7 @@ The amount is tracked for the town nearest to that company’s headquarters, and
 
 ---
 
-## 📦 What's It For?
+## What's It For?
 This script is designed for OpenTTD players and communities who want to:  
 - Run competitions between companies  
 - Track progress during multiplayer games  
@@ -33,7 +33,7 @@ This script is designed for OpenTTD players and communities who want to:
 
 ---
 
-## 🔧 Installation
+## Installation
 1. Place the `CargoTracker` folder into your `OpenTTD\content_download\game` directory
 2. In OpenTTD, go to **Game Script Settings** and select *MH Cargo Tracker*  
 3. Choose which cargo type you want to track via the script’s settings  
@@ -41,7 +41,7 @@ This script is designed for OpenTTD players and communities who want to:
 
 ---
 
-## ✅ Usage & License
+## Usage & License
 
 You are welcome to:
 - Copy, modify, or expand this script
@@ -52,7 +52,7 @@ You are welcome to:
 
 ---
 
-## 🙌 Created By
+## Created By
 
 **Master Hellish**  
 Part of the [Master Hellish Modding Projects](https://github.com/MasterHellish)

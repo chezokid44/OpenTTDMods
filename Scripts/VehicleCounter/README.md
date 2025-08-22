@@ -1,25 +1,25 @@
 # Vehicle Count
 
-## ❓ Description
+## Description
 
 A simple OpenTTD Game Script that logs the **total number of vehicles** in the game once every in-game month.  
 It’s designed as a lightweight tool for diagnostics, performance tracking, or development insight during gameplay or testing.
 
 ---
 
-## ✨ Features
+## Features
 
-- ✔️ Automatically runs every in-game day
-- ✔️ Detects month changes reliably
-- ✔️ Counts vehicles from **all companies**
-- ✔️ Outputs clean logs to the Game Script log
+- Automatically runs every in-game day
+- Detects month changes reliably
+- Counts vehicles from **all companies**
+- Outputs clean logs to the Game Script log
 
 Example log output:
 Number of vehicles in game: 327
 
 ---
 
-## 🧠 How It Works
+## How It Works
 
 - The script runs continuously in a daily loop
 - Each day it checks if the in-game month has changed
@@ -31,7 +31,7 @@ The `last_month` variable ensures logging happens only once per month.
 
 ---
 
-## 📦 What's It For?
+## What's It For?
 
 This script is ideal for:
 - Tracking how vehicle counts change over time
@@ -41,14 +41,14 @@ This script is ideal for:
 
 ---
 
-## 🔧 Installation
+## Installation
 1. Place the `VehicleCounter` folder into your `OpenTTD\content_download\game` directory
 2. Launch OpenTTD → Game Script Settings → Select Game Script → Choose **Vehicle Counter**
 3. Once in-game, **click and hold the question mark (?) icon**, then choose **AI/Game Script Debug** to view the log output
 
 ---
 
-## ✅ Usage & License
+## Usage & License
 
 You are welcome to:
 - Copy, modify, or expand this script
@@ -59,7 +59,7 @@ You are welcome to:
 
 ---
 
-## 🙌 Created By
+## Created By
 
 **Master Hellish**  
 Part of the [Master Hellish Modding Projects](https://github.com/MasterHellish)

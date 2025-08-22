@@ -1,29 +1,29 @@
 # Stat Tracker
 
-## ❓ Description
+## Description
 
 ---
 
-## ✨ Features
+## Features
 
 ---
 
-## 🧠 How It Works
+## How It Works
 
 ---
 
-## 📦 What's It For?
+## What's It For?
 
 ---
 
-## 🔧 Installation
+## Installation
 1. Place the `StatTracker` folder into your `OpenTTD\content_download\game` directory
 2. Launch OpenTTD → Game Script Settings → Select Game Script → Choose **Stat Tracker**
 3. Once in-game, **click and hold the question mark (?) icon**, then choose **AI/Game Script Debug** to view the log output
 
 ---
 
-## ✅ Usage & License
+## Usage & License
 
 You are welcome to:
 - Copy, modify, or expand this script
@@ -34,7 +34,7 @@ You are welcome to:
 
 ---
 
-## 🙌 Created By
+## Created By
 
 **Master Hellish**  
 Part of the [Master Hellish Modding Projects](https://github.com/MasterHellish)
