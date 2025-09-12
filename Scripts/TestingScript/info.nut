@@ -1,7 +1,7 @@
 class FMainClass extends GSInfo {
 	function GetAuthor()		{ return "Master Hellish"; }
 	function GetName()			{ return "MH Testing Script"; }
-	function GetDescription() 	{ return "A script that was done to test a variety of features of the API and see how they work"; }
+	function GetDescription() 	{ return "A script that was done to test a variety of features of the API and see how they work. Warning: this script may be a mess"; }
 	function GetVersion()		{ return 1; }
 	function GetDate()			{ return "2025/08/29"; }
 	function CreateInstance()	{ return "MainClass"; }
