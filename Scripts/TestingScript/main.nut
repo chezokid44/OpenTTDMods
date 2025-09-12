@@ -6,6 +6,7 @@ class MainClass extends GSController
 	// Constructor – runs once at the start of the script
 	constructor()
 	{
+		// test
 	}
 }
 
