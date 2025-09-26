@@ -50,6 +50,8 @@ function MainClass::Start()
 		// Ensure consistent tick timing (1 day = 74 ticks)
 		local ticksPassed = GSController.GetTick() - loopStartTick;
 		this.Sleep(max(1, 74 - ticksPassed));
+
+		//this.EMP(); TESTING ONLY
 	}
 }
 
@@ -70,30 +72,15 @@ function MainClass::HandleEvents()
 // Perform setup actions like logging and placing signs
 function MainClass::PostInit()
 {
-	// Output message to the GS log
-	GSLog.Info("Hello Tycoons!");
 
-	// Show a news message
-	GSNews.Create(
-		GSNews.NT_GENERAL,
-		GSText(GSText.STR_EMPTY1, "Hello Tycoons!"),
-		GSCompany.COMPANY_INVALID,
-		GSNews.NR_NONE,
-		0
-	);
 
-	// Place a sign in the center of the map
-	local middleTile = GSMap.GetTileIndex(GSMap.GetMapSizeX() / 2, GSMap.GetMapSizeY() / 2);
-	GSSign.BuildSign(
-		middleTile,
-		"Hello Tycoons!"
-	);
+	// TESTING ONLY
+	// local town_tile = GSTown.GetLocation(0)
+	// GSViewport.ScrollEveryoneTo(town_tile);
+	// this.TownGrowthExplosion(0, 1000, 1000);
 
-	// Rename company 0 if it exists
-	if(GSCompany.ResolveCompanyID(0) != GSCompany.COMPANY_INVALID) {
-		local mode = GSCompanyMode(0);
-		GSCompany.SetName("Hello Tycoon Company");
-	}
+	// TESTING ONLY
+	//this.DoEarthquake({ x = 200, y = 200 }, 2, 50);
 }
 
 // Your custom logic that runs each loop goes here
@@ -131,3 +118,5 @@ function MainClass::UpdateGoals(cid)
 function MainClass::UpdateGlobal()
 {
 }
+
+require("disasters.nut");
