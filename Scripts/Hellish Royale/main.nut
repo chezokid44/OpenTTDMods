@@ -73,6 +73,8 @@ function MainClass::HandleEvents()
 function MainClass::PostInit()
 {
 
+	// TESTING ONLY
+	this.CreateCustomSubsidy(0, 0.15, 0.50);
 
 	// TESTING ONLY
 	// local town_tile = GSTown.GetLocation(0)
@@ -120,3 +122,4 @@ function MainClass::UpdateGlobal()
 }
 
 require("disasters.nut");
+require("quests.nut");
