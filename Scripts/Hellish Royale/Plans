@@ -1,0 +1,40 @@
+Objective
+• Last company standing
+
+► Events ◄
+• EMP (Stop vehicles, RemoveOrder, ReverseVehicle, SendVehicleToDepot)
+• Artillery Bombardment (Blow stuff up in an area)
+• Earthquake (Screen shakes and some things get blown up?)
+• Town Growth Explosion (ExpandTown())
+
+► Quests ◄
+(Could use points and league table)
+• Deliver x cargo to y
+• Custom Subsidies
+• Have a crash
+• Build statue
+(do we want to say what the reward is when issuing the quest)
+
+► Rewards ◄
+• Unlock Vehicles
+• Money / Loan
+• Missile Strike
+• Exclusive Industry
+• Super town rating
+• Signal Hack (remove enemy signal)
+• Spy
+
+► Tools ◄
+• Spy (RemoveOrder / removes a signal)
+• Hit team (steals money or missile)
+• Missile
+
+► Fail Conditions ◄
+• Bankrupt
+• Had a crash / killed the most people
+• In last places in elimination time
+
+Possible stuff:
+• Towns ChangeRating()
+• Event crash/lost
+• Something with the HQ (invulnerable/safe zone)
