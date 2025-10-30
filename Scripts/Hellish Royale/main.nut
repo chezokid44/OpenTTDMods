@@ -13,6 +13,14 @@ class MainClass extends GSController
 	town_id = 0;
 	quantity = 0;
 
+	// TODO: Try and move theas later to some place in the quest area
+	company_delivery_quest_cargo = {};
+	table_id = 0;
+	company_league_table_element_ids = {};
+	cargo_id = 0;
+	town_id = 0;
+	quantity = 0;
+
 	// Constructor – runs once at the start of the script
 	constructor()
 	{
@@ -83,8 +91,10 @@ function MainClass::HandleEvents()
 function MainClass::PostInit()
 {
 
+	this.CreateDeliveryQuest(0, 0, 50);
+
 	// TESTING ONLY
-	this.CreateCustomSubsidy(0, 0.15, 0.50);
+	//this.CreateCustomSubsidy(0, 0.15, 0.50);
 
 	// TESTING ONLY
 	// local town_tile = GSTown.GetLocation(0)
@@ -98,7 +108,7 @@ function MainClass::PostInit()
 // Your custom logic that runs each loop goes here
 function MainClass::DoLoop()
 {
-	// Example: check goal conditions, update company state, etc.
+	this.CheckingDeliveryQuest();
 }
 
 // Called when a new company is created
