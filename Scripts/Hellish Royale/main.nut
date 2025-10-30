@@ -13,14 +13,6 @@ class MainClass extends GSController
 	town_id = 0;
 	quantity = 0;
 
-	// TODO: Try and move theas later to some place in the quest area
-	company_delivery_quest_cargo = {};
-	table_id = 0;
-	company_league_table_element_ids = {};
-	cargo_id = 0;
-	town_id = 0;
-	quantity = 0;
-
 	// Constructor – runs once at the start of the script
 	constructor()
 	{
