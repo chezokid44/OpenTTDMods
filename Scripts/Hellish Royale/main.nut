@@ -135,3 +135,4 @@ function MainClass::UpdateGlobal()
 
 require("disasters.nut");
 require("quests.nut");
+require("debug.nut");
