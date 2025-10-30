@@ -22,15 +22,16 @@ class MainClass extends GSController
 // Called when the script state is saved (e.g., during a savegame)
 function MainClass::Save()
 {
-	GSLog.Info("This is the log for when we are saving");
+	this.Debug("This is the log for when we are saving", 0);
+	//GSLog.Info("This is the log for when we are saving");
 	return {}; // You can return a table of data here to persist
 }
 
 // Called when the script state is loaded
 function MainClass::Load(version, tbl)
 {
-	GSLog.Info("This is the log for when we are loading");
-
+	//GSLog.Info("This is the log for when we are loading");
+	this.Debug("This is the log for when we are loading", 0);
 	// You can restore saved data from 'tbl' here
 	foreach(key, val in tbl)
 	{

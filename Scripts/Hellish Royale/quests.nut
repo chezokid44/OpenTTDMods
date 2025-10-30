@@ -21,6 +21,11 @@ function MainClass::CreateCustomSubsidy(cargo_id, min_distance_per, max_distance
 		local town_1_location = GSTown.GetLocation(town_id_1);
 		local town_2_location = GSTown.GetLocation(town_id_2);
 		local manhattan_distance = GSMap.DistanceManhattan(town_1_location, town_2_location);
+		this.Debug("manhatten distance: " + manhattan_distance, 1);
+		this.Debug("manhattan_map_size: " + manhattan_map_size, 1);
+		this.Debug("min_distance_per: " + manhattan_map_size * min_distance_per, 1);
+		this.Debug("max_distance_per: " + manhattan_map_size * max_distance_per, 1);
+		this.Debug("-----------------------------", 1);
 		// GSLog.Info("manhattan_distance: " + manhattan_distance);
 		// GSLog.Info("manhattan_map_size: " + manhattan_map_size);
 		// GSLog.Info("min_distance_per: " + manhattan_map_size * min_distance_per);
