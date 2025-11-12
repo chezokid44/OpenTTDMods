@@ -7,7 +7,7 @@ class FMainClass extends GSInfo {
 	function CreateInstance()	{ return "MainClass"; }
 	function GetShortName()		{ return "MHHT"; }
 	function GetAPIVersion()	{ return "14"; }
-	function GetUrl()			{ return "https://masterhellish.net"; }
+	function GetURL()			{ return "https://github.com/MasterHellish/OpenTTDMods/tree/main/Scripts/HelloTycoons"; }
 
 	function GetSettings() {
 	}

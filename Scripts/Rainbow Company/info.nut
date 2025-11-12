@@ -7,7 +7,7 @@ class FMainClass extends GSInfo {
 	function CreateInstance()	{ return "MainClass"; }
 	function GetShortName()		{ return "RACO"; }
 	function GetAPIVersion()	{ return "14"; }
-	function GetUrl()			{ return "None"; }
+	function GetURL()			{ return "https://github.com/MasterHellish/OpenTTDMods/tree/main/Scripts/Rainbow%20Company"; }
 
 	function GetSettings() {
 			AddSetting({

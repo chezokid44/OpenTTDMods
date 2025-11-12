@@ -1,0 +1,26 @@
+##plural 0
+
+
+#dummy
+STR_EMPTY0                        :
+STR_EMPTY1                        :{STRING}
+STR_EMPTY2                        :{STRING}{STRING}
+STR_EMPTY3                        :{STRING}{STRING}{STRING}
+STR_RAWX                          :{}{GREEN}{RAW_STRING}
+
+#goal progress
+STR_STORY_TITLE                   :{WHITE}Company annual info
+STR_STORY_PROGRESS_SHORT          :{WHITE}{NUM} {BLACK}: Value: {GREEN}{CURRENCY_LONG}{BLACK}, Income: {DKGREEN}{CURRENCY_LONG}{BLACK}, Cargo: {ORANGE}{COMMA}{BLACK}, Population: {YELLOW}{COMMA}{BLACK}, Vehicles: {LTBLUE}{COMMA}
+STR_STORY_PROGRESS_LONG           :{WHITE}{NUM} {BLACK}: Company value: {GREEN}{CURRENCY_LONG}{BLACK}, Income: {DKGREEN}{CURRENCY_LONG}{BLACK}, Cargo delivered: {ORANGE}{COMMA}{BLACK}, Map population: {YELLOW}{COMMA}{BLACK}, Vehicle count: {LTBLUE}{COMMA}
+
+#crash thing
+STR_SCORE_GOAL                    :{LTBLUE}# {NUM}   {BLACK}{COMPANY}   {ORANGE}Victims {YELLOW}{COMMA}   {BLACK}Lost to  {ORANGE}Train crashes {YELLOW}{COMMA}   {ORANGE}Road accidents {YELLOW}{COMMA}   {ORANGE}Plane crashes {YELLOW}{COMMA}   {ORANGE}Floods {YELLOW}{COMMA}
+STR_GOAL_PROGRESS                 :{GREEN}{NUM}%
+STR_GOAL_GUI_GLOBAL               :{BIG_FONT}{BLACK}You can see overall scores at global goal gui
+STR_LEADER_NEWS                   :{RED}{COMPANY} {BLACK}is now in the lead of most hazardous workplace.{} It has {RED}{COMMA} deaths {BLACK}on its conscience.
+
+#usable and well visible in GUI:
+#{BLACK} {WHITE} {GREEN} {YELLOW} {ORANGE} {SILVER} {GOLD} {LTBLUE} {DKGREEN}
+#usable colours
+#{BLACK}  {WHITE} {RED}    {GREEN} {BLUE}   {YELLOW} {ORANGE} {PURPLE} {GRAY}   {BROWN} {SILVER} {GOLD} {CREAM}  {LTBLUE} {DKBLUE} {DKGREEN} {LTBROWN}
+

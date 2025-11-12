@@ -1,0 +1,5 @@
+Version 1 (November 2025 : rev 1)
+- Added tracking of stats
+- added optional news article
+- Added load and save
+- Languages : EN

@@ -1,4 +1,4 @@
-class FMainClass extends GSInfo {
+class InfoClass extends GSInfo {
 	function GetAuthor()		{ return "Master Hellish"; }
 	function GetName()			{ return "MH Stat Tracker"; }
 	function GetDescription() {
@@ -9,7 +9,7 @@ class FMainClass extends GSInfo {
 	function CreateInstance()	{ return "MainClass"; }
 	function GetShortName()		{ return "MHST"; }
 	function GetAPIVersion()	{ return "13"; }
-	function GetUrl()			{ return "https://masterhellish.net"; }
+	function GetURL()			{ return "https://github.com/MasterHellish/OpenTTDMods/tree/main/Scripts/StatTracker"; }
 
 	function GetSettings() {
 		AddSetting({
@@ -24,4 +24,4 @@ class FMainClass extends GSInfo {
 	}
 }
 
-RegisterGS(FMainClass());
+RegisterGS(InfoClass());

@@ -8,7 +8,7 @@ class FMainClass extends GSInfo {
 	function CreateInstance()	{ return "MainClass"; }
 	function GetShortName()		{ return "EFDT"; }
 	function GetAPIVersion()	{ return "14"; }
-	function GetUrl()			{ return ""; }
+	function GetURL()			{ return "https://github.com/MasterHellish/OpenTTDMods/tree/main/Scripts/Hellish%20Royale"; }
 
 	function GetSettings() {
 		AddSetting({

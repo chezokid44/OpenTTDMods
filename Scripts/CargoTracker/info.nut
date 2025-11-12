@@ -9,7 +9,7 @@ class FMainClass extends GSInfo {
 	function CreateInstance()	{ return "MainClass"; }
 	function GetShortName()		{ return "MHCT"; }
 	function GetAPIVersion()	{ return "14"; }
-	function GetUrl()			{ return "https://masterhellish.net"; }
+	function GetURL()			{ return "https://github.com/MasterHellish/OpenTTDMods/tree/main/Scripts/CargoTracker"; }
 
 	function GetSettings() {
 		AddSetting({

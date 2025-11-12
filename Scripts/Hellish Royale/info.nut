@@ -7,7 +7,7 @@ class FMainClass extends GSInfo {
 	function CreateInstance()	{ return "MainClass"; }
 	function GetShortName()		{ return "MHHR"; }
 	function GetAPIVersion()	{ return "14"; }
-	function GetUrl()			{ return "https://masterhellish.net"; }
+	function GetURL()			{ return "https://masterhellish.net"; }
 
 	function GetSettings() {
 	}
