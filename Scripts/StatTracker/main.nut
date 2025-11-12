@@ -59,9 +59,21 @@ function MainClass::DoLoop()
 
 	// Get vehicle count
 	local count = 0;
-	local vehicles= GSVehicleList();
+	local vehicles = GSVehicleList();
 	foreach(id, _ in vehicles) {
 		count++;
+	}
+
+	local towns = GSTownList();
+	local town_count = 0;
+	foreach(id, _ in towns) {
+		town_count++;
+	}
+
+	local industries = GSIndustryList();
+	local industry_count = 0;
+	foreach(id, _ in industries) {
+		industry_count++;
 	}
 
 	// Log it
@@ -71,6 +83,9 @@ function MainClass::DoLoop()
 	GSLog.Info("Number of crashes: " + stat_crashes);
 	GSLog.Info("Number of bankruptcies: " + stat_bankrupt);
 	GSLog.Info("Number of mergers: " + stat_merger);
+	GSLog.Info("Number of towns: " + town_count);
+	GSLog.Info("Number of industries: " + industry_count);
+
 
 	// Notification
 	if (this.show_news_article){
