@@ -15,6 +15,7 @@ Together, these elements enhance, extend, or change gameplay in OpenTTD, and are
 ## 🎯 Purpose
 
 The goal of this project is to provide a set of creative, useful, and sometimes experimental OpenTTD modifications that:
+
 - Improve gameplay variety
 - Enable new scenarios and challenges
 - Support community events and livestreams
@@ -25,6 +26,18 @@ The goal of this project is to provide a set of creative, useful, and sometimes 
 ## 👥 Authors & Contributors
 
 This project is led by **[Master Hellish](https://masterhellish.net)** with the support of the amazing Master Hellish Community. Contributions, feedback, and ideas come from community members across YouTube, Discord, Twitch, and beyond.
+
+---
+
+## ⚠️ Guidelines
+
+All mods in this project should...
+
+- Include a README file.
+- Include a changelog.
+- Include a licence.
+- Include a info class with accurate: Author, Name, Description, Version, URL.
+- Have code which is commented.
 
 ---
 
@@ -39,4 +52,5 @@ If you use or showcase these mods, a shout-out to **Master Hellish** is always a
 ## 💬 Want to Get Involved?
 
 Join the community and help shape the future of OpenTTD modding:
-🌐 https://masterhellish.net
+🔗 https://masterhellish.net
+🔗 https://github.com/MasterHellish/OpenTTDMods
