@@ -68,6 +68,8 @@ function MainClass::HandleEvents()
 
 					// Randomly choose one endpoint to receive the growth explosion.
 					local chosen = (GSBase.RandRange(2) == 0) ? ta : tb;
+                    local town_location = GSTown.GetLocation(chosen);
+                    GSViewport.ScrollEveryoneTo(town_location);
 					this.TownGrowthExplosion(chosen, grow_amt, grow_loop);
                 }
                 break;
@@ -319,7 +321,19 @@ function MainClass::TownGrowthExplosion(town_id, amount, looper)
 	// amount: growth amount per iteration as accepted by GSTown.ExpandTown
 	// looper: number of times to apply growth, allows large bursts
 
-	for (local i = 0; i < looper; i++) {
+	local sleep_time;
+
+    if (looper == 1) {
+        sleep_time = 0; // No need to sleep if it only runs once
+    } else {
+        // Scale linearly between 5 (few loops) and 2 (many loops)
+        sleep_time = floor(5.0 - ((looper - 2.0) * 3.0 / 498.0)).tointeger();
+        if (sleep_time < 2) sleep_time = 2;
+        if (sleep_time > 5) sleep_time = 5;
+    }
+
+    for (local i = 0; i < looper; i++) {
 		GSTown.ExpandTown(town_id, amount);
+        if (sleep_time > 0) this.Sleep(sleep_time);
 	}
 }

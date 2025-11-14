@@ -49,11 +49,11 @@ function MainClass::Init()
 
 		// Log loaded statistics for debugging
 		GSLog.Info("Loaded last year: " + this.last_year);
-		GSLog.Info("Loaded crashes: " + this.stat_crashes);
-		GSLog.Info(" - Train crashes: " + this.stat_train_crashes);
-		GSLog.Info(" - Road crashes: " + this.stat_road_crashes);
-		GSLog.Info(" - Flood crashes: " + this.stat_flood_crashes);
-		GSLog.Info(" - Plane crashes: " + this.stat_plane_crashes);
+		GSLog.Info("Vehicles destroyed: " + stat_crashes);
+		GSLog.Info(" - Trains destroyed: " + stat_train_crashes);
+		GSLog.Info(" - Road vehicles destroyed: " + stat_road_crashes);
+		GSLog.Info(" - Flooded vehicles destroyed: " + stat_flood_crashes);
+		GSLog.Info(" - Aircraft destroyed: " + stat_plane_crashes);
 		GSLog.Info("Loaded bankruptcies: " + this.stat_bankrupt);
 		GSLog.Info("Loaded mergers: " + this.stat_merger);
 	}
@@ -94,11 +94,11 @@ function MainClass::DoLoop()
 	GSLog.Info("");
 	GSLog.Info("*** " + current_year + " ***");
 	GSLog.Info("Number of vehicles in game: " + count);
-	GSLog.Info("Total crashes: " + stat_crashes);
-	GSLog.Info(" - Train crashes: " + stat_train_crashes);
-	GSLog.Info(" - Road crashes: " + stat_road_crashes);
-	GSLog.Info(" - Flood crashes: " + stat_flood_crashes);
-	GSLog.Info(" - Plane crashes: " + stat_plane_crashes);
+	GSLog.Info("Vehicles destroyed: " + stat_crashes);
+	GSLog.Info(" - Trains destroyed: " + stat_train_crashes);
+	GSLog.Info(" - Road vehicles destroyed: " + stat_road_crashes);
+	GSLog.Info(" - Flooded vehicles destroyed: " + stat_flood_crashes);
+	GSLog.Info(" - Aircraft destroyed: " + stat_plane_crashes);
 	GSLog.Info("Number of bankruptcies: " + stat_bankrupt);
 	GSLog.Info("Number of mergers: " + stat_merger);
 	GSLog.Info("Number of towns: " + town_count);
@@ -108,11 +108,11 @@ function MainClass::DoLoop()
 	this.show_news_article = GSController.GetSetting("show_news_article");
 	if (this.show_news_article) {
 		local text_to_display = "Vehicles: " + count +
-			". Crashes: " + stat_crashes +
+			". Vehicles destroyed: " + stat_crashes +
 			" (Trains: " + stat_train_crashes +
 			", Road: " + stat_road_crashes +
-			", Flood: " + stat_flood_crashes +
-			", Planes: " + stat_plane_crashes + ")" +
+			", Flooded: " + stat_flood_crashes +
+			", Aircraft: " + stat_plane_crashes + ")" +
 			". Bankruptcies: " + stat_bankrupt +
 			". Mergers: " + stat_merger +
 			". Towns: " + town_count +
