@@ -55,6 +55,14 @@ This design allows for lightweight monitoring without affecting gameplay balance
 
 ---
 
+## Bug Reporting & Help
+
+To report bugs or get help the best place to go to is the Master Hellish Discord https://discord.masterhellish.net.
+Here you can use the "openttd-mod-dev" channel for any conversations relating to this mod. Or you can use the "Help" forum for bug reporting.
+If you are unable to use discord You can contact via another method [Master Hellish Links](https://linktr.ee/masterhellish).
+
+---
+
 ## Usage & License
 
 You are welcome to:
