@@ -24,8 +24,10 @@ The script includes several settings that let you tune the difficulty and behavi
 - towns_per_day - How many towns are affected each day. Higher values mean faster and wider decline across the map.
 - buildings_per_town - How many buildings are demolished in each affected town per day. Controls the intensity of daily shrinkage.
 - min_active_subsidies - The minimum number of subsidies that must exist at any time. If the number falls below this threshold, new town to town subsidies are created.
-- subsidy_growth_amount - The amount of town growth applied per step when a qualifying subsidy is awarded.
 - subsidy_growth_iterations - How many growth steps are applied when a qualifying subsidy is awarded. Larger numbers produce much larger growth bursts.
+  (0-50 Small, 50-100 medium, 100-300 large, 300+ silly)
+- move_viewport_on_town_grow - If enabled, the game view automatically moves to the town when it grows. Useful for visibility and debugging.
+- show_news_on_town_grow - If enabled, a news message is shown whenever a town grows.
   These values can be customised through the Game Script settings in OpenTTD, and each has its own easy, medium, hard, and custom defaults.
 
 ---

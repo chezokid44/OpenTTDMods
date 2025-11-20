@@ -1,0 +1,8 @@
+Version 1 (November 2025)
+- Added daily town shrink system that demolishes buildings each in-game day
+- Added population recovery system triggered by winning passenger subsidies
+- Added automatic creation of new subsidies when too few are active
+- Added optional viewport movement when a town grows
+- Added optional news messages for town growth events
+- Added custom Game Script parameters for difficulty tuning
+- Added startup news message explaining the gameplay mechanics

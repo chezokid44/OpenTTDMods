@@ -61,16 +61,35 @@ function MainClass::HandleEvents()
                     // Identify the two towns in the awarded route.
                     local ta = GSSubsidy.GetSourceIndex(event_id);
                     local tb = GSSubsidy.GetDestinationIndex(event_id);
+                    local company_id  = GSSubsidy.GetAwardedTo(event_id);
+                    local company_name  = GSCompany.GetName(company_id);
 
 					// Pull growth tuning from settings so it is script configurable.
-					local grow_amt = GSController.GetSetting("subsidy_growth_amount");
 					local grow_loop = GSController.GetSetting("subsidy_growth_iterations");
 
 					// Randomly choose one endpoint to receive the growth explosion.
 					local chosen = (GSBase.RandRange(2) == 0) ? ta : tb;
                     local town_location = GSTown.GetLocation(chosen);
-                    GSViewport.ScrollEveryoneTo(town_location);
-					this.TownGrowthExplosion(chosen, grow_amt, grow_loop);
+                    local town_name = GSTown.GetName(chosen);
+
+                    local move_viewport_on_town_grow = GSController.GetSetting("move_viewport_on_town_grow");
+                    if (move_viewport_on_town_grow){
+                        GSViewport.ScrollEveryoneTo(town_location);
+                    }
+
+                    local show_news_on_town_grow = GSController.GetSetting("show_news_on_town_grow");
+                    if (show_news_on_town_grow){
+                        local news_text = "Subsidy awarded to " + company_name + ". " + town_name + " will explode in population!";
+                        GSNews.Create(
+                            GSNews.NT_GENERAL,
+                            GSText(GSText.STR_SUBSIDY_AWARDED, company_name, town_name),
+                            GSCompany.COMPANY_INVALID,
+                            GSNews.NR_TOWN,
+                            chosen
+                        );
+                    }
+
+					this.TownGrowthExplosion(chosen, grow_loop);
                 }
                 break;
             }
@@ -83,7 +102,7 @@ function MainClass::PostInit()
 	// One time info message to set the scenario narrative.
 	GSNews.Create(
 		GSNews.NT_GENERAL,
-		GSText(GSText.STR_EMPTY1, "Towns shrink over time - win subsidies to drive their growth."),
+		GSText(GSText.STR_GAME_START_TOWNS),
 		GSCompany.COMPANY_INVALID,
 		GSNews.NR_NONE,
 		0
@@ -121,7 +140,7 @@ function MainClass::SmashBuildingsAcrossTowns(town_count, buildings_per_town)
 
     // For each selected town, attempt to demolish a number of valid town buildings.
     foreach (tid in towns) {
-        SmashInSingleTown(tid, buildings_per_town, 20);
+        SmashInSingleTown(tid, buildings_per_town);
     }
 }
 
@@ -147,7 +166,7 @@ function GetRandomDistinctTownIds(n)
     return out;
 }
 
-function SmashInSingleTown(town_id, buildings_per_town, radius)
+function SmashInSingleTown(town_id, buildings_per_town)
 {
     if (town_id == null) return;
 
@@ -155,10 +174,13 @@ function SmashInSingleTown(town_id, buildings_per_town, radius)
     local town_tile = GSTown.GetLocation(town_id);
     if (!GSMap.IsValidTile(town_tile)) return;
 
+    local pop = GSTown.GetPopulation(town_id);
+    local radius = floor(pop / 1000).tointeger() * 2 + 10;
+
     // Try to demolish up to buildings_per_town structures. Each has up to 100 attempts to find a valid target.
     for (local k = 0; k < buildings_per_town; k++) {
         local tries = 0;
-        while (tries++ < 100) {
+        while (tries++ < 10) {
             local t = GetRandomNearbyTile(town_tile, radius);
             if (!GSMap.IsValidTile(t)) continue;
             if (!IsTownBuildingTile(t, town_id)) continue;
@@ -314,26 +336,20 @@ function HasTownTownSubsidy(a, b, cargo_id)
     return false;
 }
 
-function MainClass::TownGrowthExplosion(town_id, amount, looper)
+function MainClass::TownGrowthExplosion(town_id, looper)
 {
 	// Example usage: this.TownGrowthExplosion(0, 1, 1000)
 	// town_id: town to grow
-	// amount: growth amount per iteration as accepted by GSTown.ExpandTown
 	// looper: number of times to apply growth, allows large bursts
 
-	local sleep_time;
+	this.Sleep(3 * 37); // Three second pause to begin with (assuming 12 minutes per year and 74 ticks a day)
 
-    if (looper == 1) {
-        sleep_time = 0; // No need to sleep if it only runs once
-    } else {
-        // Scale linearly between 5 (few loops) and 2 (many loops)
-        sleep_time = floor(5.0 - ((looper - 2.0) * 3.0 / 498.0)).tointeger();
-        if (sleep_time < 2) sleep_time = 2;
-        if (sleep_time > 5) sleep_time = 5;
-    }
+    local sleep_ticks = floor(5.0 * (1000.0 - looper) / 990.0).tointeger();
+    if (sleep_ticks < 0) sleep_ticks = 0;
+    if (sleep_ticks > 5) sleep_ticks = 5;
 
     for (local i = 0; i < looper; i++) {
-		GSTown.ExpandTown(town_id, amount);
-        if (sleep_time > 0) this.Sleep(sleep_time);
-	}
+        GSTown.ExpandTown(town_id, 1);
+        if (sleep_ticks > 0) this.Sleep(sleep_ticks);
+    }
 }
