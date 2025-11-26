@@ -1,7 +1,7 @@
 STR_EMPTY0                    :
 STR_EMPTY1                    :{RAW_STRING}
 
-STR_GAME_START_TOWNS          :{RED}Towns shrink over time!{}{BLACK}Win subsidies to drive their growth.
+STR_GAME_START_TOWNS          :{RED}Towns shrink over time!{}{BLACK}Win passenger subsidies to drive their growth.
 STR_SUBSIDY_AWARDED           :{DKGREEN}{COMPANY}{BLACK} has been awarded a subsidy.{}{RED}{TOWN}{BLACK} will explode in population.
 
 #usable and well visible in GUI:

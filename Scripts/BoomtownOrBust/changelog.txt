@@ -1,3 +1,11 @@
+Version 2 (November 2025)
+- Added setting to change subsidy min and max distance
+- Added setting scroll viewport when damage is above 100 per town
+- Added setting to toggle introduction message
+- Updated subsidies to have a min and max distance
+- Updated settings text
+- Fix incorrect town name in subsidy news notification
+
 Version 1 (November 2025)
 - Added daily town shrink system that demolishes buildings each in-game day
 - Added population recovery system triggered by winning passenger subsidies

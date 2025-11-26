@@ -7,6 +7,8 @@ class MainClass extends GSController
 	SUBSIDY_CARGO = 0;
 	PASSENGER_CARGO = 0;
 
+    invalid_subsidy_question_shown = false;
+
 	constructor()
 	{
 		// Nothing to initialize yet. Fields are set above.
@@ -62,7 +64,6 @@ function MainClass::HandleEvents()
                     local ta = GSSubsidy.GetSourceIndex(event_id);
                     local tb = GSSubsidy.GetDestinationIndex(event_id);
                     local company_id  = GSSubsidy.GetAwardedTo(event_id);
-                    local company_name  = GSCompany.GetName(company_id);
 
 					// Pull growth tuning from settings so it is script configurable.
 					local grow_loop = GSController.GetSetting("subsidy_growth_iterations");
@@ -70,7 +71,6 @@ function MainClass::HandleEvents()
 					// Randomly choose one endpoint to receive the growth explosion.
 					local chosen = (GSBase.RandRange(2) == 0) ? ta : tb;
                     local town_location = GSTown.GetLocation(chosen);
-                    local town_name = GSTown.GetName(chosen);
 
                     local move_viewport_on_town_grow = GSController.GetSetting("move_viewport_on_town_grow");
                     if (move_viewport_on_town_grow){
@@ -79,10 +79,9 @@ function MainClass::HandleEvents()
 
                     local show_news_on_town_grow = GSController.GetSetting("show_news_on_town_grow");
                     if (show_news_on_town_grow){
-                        local news_text = "Subsidy awarded to " + company_name + ". " + town_name + " will explode in population!";
                         GSNews.Create(
                             GSNews.NT_GENERAL,
-                            GSText(GSText.STR_SUBSIDY_AWARDED, company_name, town_name),
+                            GSText(GSText.STR_SUBSIDY_AWARDED, company_id, chosen),
                             GSCompany.COMPANY_INVALID,
                             GSNews.NR_TOWN,
                             chosen
@@ -99,14 +98,17 @@ function MainClass::HandleEvents()
 
 function MainClass::PostInit()
 {
-	// One time info message to set the scenario narrative.
-	GSNews.Create(
-		GSNews.NT_GENERAL,
-		GSText(GSText.STR_GAME_START_TOWNS),
-		GSCompany.COMPANY_INVALID,
-		GSNews.NR_NONE,
-		0
-	);
+	local show_intro_message = GSController.GetSetting("show_intro_message");
+    if (show_intro_message){
+    	// One time info message to set the scenario narrative.
+    	GSNews.Create(
+    	GSNews.NT_GENERAL,
+    	GSText(GSText.STR_GAME_START_TOWNS),
+    	GSCompany.COMPANY_INVALID,
+    	GSNews.NR_NONE,
+    	0
+    	);
+    }
 }
 
 function MainClass::DoDayLoop()
@@ -174,6 +176,13 @@ function SmashInSingleTown(town_id, buildings_per_town)
     local town_tile = GSTown.GetLocation(town_id);
     if (!GSMap.IsValidTile(town_tile)) return;
 
+    local move_viewport_on_town_smash = GSController.GetSetting("move_viewport_on_town_smash");
+    local buildings_per_town = GSController.GetSetting("buildings_per_town");
+    if (move_viewport_on_town_smash && buildings_per_town >=100){
+        GSViewport.ScrollEveryoneTo(town_tile);
+        this.Sleep(3 * 37); // Three second pause to begin with (assuming 12 minutes per year and 74 ticks a day)
+    }
+
     local pop = GSTown.GetPopulation(town_id);
     local radius = floor(pop / 1000).tointeger() * 2 + 10;
 
@@ -188,6 +197,9 @@ function SmashInSingleTown(town_id, buildings_per_town)
             // Attempt demolition. If it succeeded, move to the next building.
             if (GSTile.DemolishTile(t)) break;
         }
+    }
+    if (move_viewport_on_town_smash && buildings_per_town >=100){
+        this.Sleep(3 * 37); // Three second pause to begin with (assuming 12 minutes per year and 74 ticks a day)
     }
 }
 
@@ -281,8 +293,33 @@ function CountUnawardedPassengerSubsidies()
     }
     return n;
 }
+
 function CreateTownSubsidy()
 {
+    local min_distance_per = GSController.GetSetting("min_subsidie_distance");
+    local max_distance_per = GSController.GetSetting("max_subsidie_distance");
+    // Validation: min must be strictly less than max
+    if (min_distance_per >= max_distance_per) {
+        // Only show the info box once while broken
+        if (!this.invalid_subsidy_question_shown) {
+            this.invalid_subsidy_question_shown = true;
+            GSGoal.Question(
+                1001,
+                0,
+                "Invalid subsidy distance settings: Minimum must be less than maximum. Open the Game Script settings and fix Minimum distance for subsidy and Maximum distance for subsidy.",
+                GSGoal.QT_WARNING,
+                GSGoal.BUTTON_OK
+            );
+        }
+
+        return false;
+    }
+    this.invalid_subsidy_question_shown = false;
+
+    local manhattan_map_size = GSMap.GetMapSizeX() + GSMap.GetMapSizeY();
+    local min_dist = manhattan_map_size * (min_distance_per.tofloat() / 100.0);
+    local max_dist = manhattan_map_size * (max_distance_per.tofloat() / 100.0);
+
     // Create a single town-to-town subsidy for SUBSIDY_CARGO if possible.
     // Approach:
     // 1. Shuffle towns to get random ordering.
@@ -302,14 +339,29 @@ function CreateTownSubsidy()
     // Try each unordered pair a,b. Attempt a->b first, then b->a if still not present.
     for (local i = 0; i < arr.len(); i++) {
         for (local j = i + 1; j < arr.len(); j++) {
-            local a = arr[i], b = arr[j];
+            local a = arr[i];
+            local b = arr[j];
             if (a == b) continue;
 
+            // Distance check
+            local loc_a = GSTown.GetLocation(a);
+            local loc_b = GSTown.GetLocation(b);
+            local manhattan_distance = GSMap.DistanceManhattan(loc_a, loc_b);
+
+            // If not within the requested distance range, skip this pair.
+            if (manhattan_distance <= min_dist || manhattan_distance >= max_dist) {
+                continue;
+            }
+
+            // Skip if we already have a subsidy in either direction.
             if (HasTownTownSubsidy(a, b, SUBSIDY_CARGO)) continue;
 
+            // Try a -> b
             if (GSSubsidy.Create(SUBSIDY_CARGO, GSSubsidy.SPT_TOWN, a, GSSubsidy.SPT_TOWN, b)) {
                 return true;
             }
+
+            // If still no subsidy, try b -> a
             if (!HasTownTownSubsidy(a, b, SUBSIDY_CARGO) &&
                 GSSubsidy.Create(SUBSIDY_CARGO, GSSubsidy.SPT_TOWN, b, GSSubsidy.SPT_TOWN, a)) {
                 return true;
