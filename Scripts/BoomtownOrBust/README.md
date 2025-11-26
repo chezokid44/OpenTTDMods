@@ -12,8 +12,10 @@ Boomtown Or Bust is a gameplay focused OpenTTD Game Script where towns gradually
 - Demolishes town buildings each in game day to simulate decline
 - Randomly selects towns and tiles for destruction
 - Ensures a minimum number of active subsidies
+- Applies distance limits when generating new subsidies
 - Triggers rapid town growth when players win eligible subsidies
-- Uses Game Script components such as GSController, GSEventController, GSTown, GSTile, GSSubsidy, and GSMap
+- Optional intro message when the game starts or loads
+- Optional viewport movement on town growth or large town smash
 
 ---
 
@@ -21,14 +23,16 @@ Boomtown Or Bust is a gameplay focused OpenTTD Game Script where towns gradually
 
 The script includes several settings that let you tune the difficulty and behaviour of town decay and growth:
 
-- towns_per_day - How many towns are affected each day. Higher values mean faster and wider decline across the map.
-- buildings_per_town - How many buildings are demolished in each affected town per day. Controls the intensity of daily shrinkage.
-- min_active_subsidies - The minimum number of subsidies that must exist at any time. If the number falls below this threshold, new town to town subsidies are created.
-- subsidy_growth_iterations - How many growth steps are applied when a qualifying subsidy is awarded. Larger numbers produce much larger growth bursts.
-  (0-50 Small, 50-100 medium, 100-300 large, 300+ silly)
-- move_viewport_on_town_grow - If enabled, the game view automatically moves to the town when it grows. Useful for visibility and debugging.
-- show_news_on_town_grow - If enabled, a news message is shown whenever a town grows.
-  These values can be customised through the Game Script settings in OpenTTD, and each has its own easy, medium, hard, and custom defaults.
+- towns_per_day - How many towns are affected each day. 1 for steady long term play, higher values mean faster and wider decline. Range 1 to 500. Defaults are easy 1, medium 2, hard 3, custom 1.
+- buildings_per_town - How much destruction in each affected town per day. 1 for steady decline, 500 for town smash. Range 1 to 500. Defaults are easy 1, medium 2, hard 3, custom 1.
+- subsidy_growth_iterations - How many growth steps are applied when a qualifying subsidy is awarded. 50 is small, 500 is lots, 2000 is silly. Range 1 to 2000. Defaults are easy 100, medium 50, hard 25, custom 50.
+- min_active_subsidies - The minimum number of subsidies that must exist at any time. If the number falls below this threshold, new town to town subsidies are created. Range 0 to 50. Defaults are easy 10, medium 5, hard 3, custom 5.
+- min_subsidie_distance - Minimum distance required for subsidy creation, as a percentage of the map. Range 1 to 90. Defaults are easy 1, medium 5, hard 10, custom 5.
+- max_subsidie_distance - Maximum distance allowed for subsidy creation, as a percentage of the map. Range 10 to 100. Defaults are easy 10, medium 20, hard 50, custom 20.
+- show_intro_message - If enabled, an introduction message is shown when the game starts or loads. Default 1 (enabled).
+- show_news_on_town_grow - If enabled, a news message is shown whenever a town grows. Default 1 (enabled).
+- move_viewport_on_town_grow - If enabled, the game view automatically moves to the town when it grows. Default 0 (disabled).
+- move_viewport_on_town_smash - If enabled, the game view automatically moves to the town when destruction of 100 or more occurs. Default 1 (enabled).
 
 ---
 
