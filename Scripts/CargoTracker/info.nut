@@ -1,6 +1,6 @@
 class FMainClass extends GSInfo {
 	function GetAuthor()		{ return "Master Hellish"; }
-	function GetName()			{ return "MH Cargo Tracker"; }
+	function GetName()			{ return "Cargo Tracker"; }
 	function GetDescription() {
 		return "Tracks how much of a chosen cargo is delivered to the town nearest each company's HQ, shown in a league table."
 	}

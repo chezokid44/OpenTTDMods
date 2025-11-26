@@ -1,6 +1,6 @@
 class InfoClass extends GSInfo {
 	function GetAuthor()		{ return "Master Hellish"; }
-	function GetName()			{ return "MH Boomtown Or Bust"; }
+	function GetName()			{ return "Boomtown Or Bust"; }
 	function GetDescription() 	{ return "Boomtown Or Bust makes towns shrink over time, and players must win subsidies to trigger growth, creating a dynamic cycle of decline and recovery."; }
 	function GetVersion()		{ return 1; }
 	function GetDate()			{ return "2025/11/20"; }

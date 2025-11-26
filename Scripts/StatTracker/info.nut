@@ -1,6 +1,6 @@
 class InfoClass extends GSInfo {
 	function GetAuthor()		{ return "Master Hellish"; }
-	function GetName()			{ return "MH Stat Tracker"; }
+	function GetName()			{ return "Stat Tracker"; }
 	function GetDescription() {
 	    return "Tracks a number of statistics (vehicles, crashes (total, train, road, flood, planes) bankruptcies, mergers, towns, industries). Logs them each year/period in the AI/Game Script Debug log or news feed (if enabled)."
 	}

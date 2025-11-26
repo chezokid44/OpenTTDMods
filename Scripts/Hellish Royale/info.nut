@@ -1,6 +1,6 @@
 class FMainClass extends GSInfo {
 	function GetAuthor()		{ return "Master Hellish"; }
-	function GetName() 			{return "MH Hellish Royale";}
+	function GetName() 			{return "Hellish Royale";}
 	function GetDescription() 	{ return "Coming Soon"; }
 	function GetVersion()		{ return 0; }
 	function GetDate()			{ return "2025/07/16"; }

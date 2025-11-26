@@ -1,4 +1,4 @@
-# MH Stat Tracker
+# Stat Tracker
 
 ## Description
 

@@ -1,6 +1,6 @@
 class Info extends GSInfo {
 	function GetAuthor()      { return "Master Hellish"; }
-	function GetName()        { return "MH Crash Victim Counter"; }
+	function GetName()        { return "Crash Victim Counter"; }
 	function GetDescription() { return ""; }
 	function GetVersion()     { return 0; }
 	function GetDate()        { return "2025-11-12"; }
