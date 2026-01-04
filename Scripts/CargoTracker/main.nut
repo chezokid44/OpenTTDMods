@@ -43,7 +43,7 @@ function MainClass::Start()
 function MainClass::Init()
 {
 	GSLog.Info("*********************");
-	GSLog.Info("*** MH Cargo Tracker ***");
+	GSLog.Info("*** Cargo Tracker ***");
 	GSLog.Info("*********************");
 	GSLog.Info("");
 

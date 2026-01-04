@@ -5,6 +5,7 @@
 - Add a feature (toggle by a parameter)that toggles the amount of towns that are nuked each day depending on the number of towns on the map.
 - Add blank save function to prevent log warnings.
 - Add a log to advise on the number of towns in the game.
+- Option to change cagro
 
 # Stat Tracker
 
