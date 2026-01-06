@@ -1,0 +1,5 @@
+Version 1 (Jan 2026)
+- Crash victim tracking per company (vehicle crash event victims are attributed to the vehicle owner).
+- League Table scoreboard
+- Company event handling
+- Save and load support

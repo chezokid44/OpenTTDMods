@@ -1,26 +1,45 @@
-# MH Crash Victim Counter
+# Destruction Disaster
 
 ## Description
+
+Destruction Disaster is a lightweight OpenTTD Game Script that tracks how many passengers are lost in vehicle crashes, per company. It publishes those totals into a League Table so players can see, at a glance, which company has caused the most destruction.
 
 ---
 
 ## Features
 
+- Crash victim tracking per company
+- Live League Table scoreboard
+- Handles company lifecycle events
+- Save and load support
+
 ---
 
 ## How It Works
+
+On game start, the script scans existing companies and sets up a League Table (fresh games only).
+The script then runs continuously in a once-per-day loop (1 OpenTTD day is treated as 74 ticks).
+It listens for Game Script events and reacts accordingly:
+- Vehicle crashed: adds victims to the owning company’s total and updates that company’s League Table score.
+- Company new: adds the company and creates a League Table entry.
+- Company renamed: updates the League Table label.
+- Company bankrupt / merged: removes the League Table entry and removes the company from tracking.
+On save, it stores [company_id, victims] for all tracked companies. On load, it restores them and continues tracking.
 
 ---
 
 ## What's It For?
 
+This script is for players who want a simple, always-on “disaster scoreboard” in a session.
+It does not change gameplay mechanics, it only observes events and reports scores.
+
 ---
 
 ## Installation
 
-1. Place the `StatTracker` folder into your `OpenTTD\content_download\game` directory
-2. Launch OpenTTD → Game Script Settings → Select Game Script → Choose **Stat Tracker**
-3. Once in-game, **click and hold the question mark (?) icon**, then choose **AI/Game Script Debug** to view the log output
+1. Place the `Destruction Disaster` folder into your `OpenTTD\content_download\game` directory
+2. Launch OpenTTD → Game Script Settings → Select Game Script → Choose **Destruction Disaster**
+3. To view the scores open the league table.
 
 ---
 

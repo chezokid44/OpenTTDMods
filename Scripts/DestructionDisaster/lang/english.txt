@@ -8,6 +8,8 @@ STR_EMPTY2                        :{STRING}{STRING}
 STR_EMPTY3                        :{STRING}{STRING}{STRING}
 STR_RAWX                          :{}{GREEN}{RAW_STRING}
 
+STR_TABLE_TITLE             :Crash Victims Table
+
 #usable and well visible in GUI:
 #{BLACK} {WHITE} {GREEN} {YELLOW} {ORANGE} {SILVER} {GOLD} {LTBLUE} {DKGREEN}
 #usable colours

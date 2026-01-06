@@ -2,25 +2,12 @@ class MainClass extends GSController
 {
 	data = null;
 	companies = [];
-
-	current_date = 0;
-	last_date = 0;
-	current_month = 0;
-	last_month = 0;
-	current_year = 0;
-	last_year = 0;
-
 	game_was_loaded = false;
+	table_id = 0;
+	company_league_table_element_ids = {};
 
-	constructor()	{
-		this.scorelist = GSList();
-	}
-	function Process();
-	function DailyLoop();
-	function MonthlyLoop();
-	function YearlyLoop();
+	constructor(){}
 	function GetCompanyByID(id);
-	function CompanyRemoveByID(companyid);
 }
 
 function MainClass::Start() {
@@ -31,7 +18,7 @@ function MainClass::Start() {
 	while (true) {
 		local loopStartTick = GSController.GetTick();
 		this.CheckEvents();
-		this.Process();
+		//this.Process();
 		// Ensure consistent tick timing (1 day = 74 ticks)
 		local ticksPassed = GSController.GetTick() - loopStartTick;
 		this.Sleep((74 - ticksPassed) > 1 ? (74 - ticksPassed) : 1);
@@ -52,33 +39,15 @@ function MainClass::Init()
 			}
 		}
 	}
-}
 
-function MainClass::Process() {
-	this.current_date = GSDate.GetCurrentDate();
-	this.current_month = GSDate.GetMonth(this.current_date);
-	this.current_year = GSDate.GetYear(this.current_date);
-
-	//Daily loop
-	if(this.current_date == this.last_date) {
-		return;
-	}
-	this.last_date = this.current_date;
-	this.DailyLoop();
-
-	//Monthly loop
-	if(this.current_month == this.last_month) {
-		return;
-	}
-	this.last_month = this.current_month;
-	this.MonthlyLoop();
-
-	//Yearly loop
-	if(this.current_year == this.last_year) {
-		return;
-	}
-	this.last_year = this.current_year;
-	this.YearlyLoop();
+	// Create the league table
+	if (!this.game_was_loaded) {
+		this.table_id = GSLeagueTable.New(
+			GSText(GSText.STR_TABLE_TITLE),
+			"",
+			""
+		);
+	};
 }
 
 function MainClass::CheckEvents() {
@@ -91,46 +60,77 @@ function MainClass::CheckEvents() {
 		switch(eventType) {
 			case GSEvent.ET_COMPANY_BANKRUPT:	{
 				local deadcompany = GSEventCompanyBankrupt.Convert(event);
-				this.CompanyRemoveByID(deadcompany.GetCompanyID());
+				local company_id = deadcompany.GetCompanyID();
+				GSLeagueTable.RemoveElement(company_id);
+				delete this.company_league_table_element_ids[company_id]
+				this.companies.remove(company_id);
 				break;
 			}
 			case GSEvent.ET_COMPANY_MERGER: {
-
 				local merge = GSEventCompanyMerger.Convert(event);
-				this.CompanyRemoveByID(merge.GetOldCompanyID());
+				local old_company_id = merge.GetOldCompanyID()
+				GSLeagueTable.RemoveElement(old_company_id);
+				delete this.company_league_table_element_ids[old_company_id]
+				this.companies.remove(old_company_id);
 				break;
 			}
 			case GSEvent.ET_COMPANY_NEW: {
 				local newcompany = GSEventCompanyNew.Convert(event);
-				local cid = newcompany.GetCompanyID();
-				this.companies.append( Company(cid) );
+				local company_id = newcompany.GetCompanyID();
+				this.companies.append( Company(company_id) );
+				local company = this.GetCompanyByID(company_id);
+				local company_name = GSCompany.GetName(company.id);
+				this.company_league_table_element_ids[company.id] <- GSLeagueTable.NewElement(
+					this.table_id,
+					0,
+					company.id,
+					company_name,
+					"" + 0,
+					GSLeagueTable.LINK_COMPANY,
+					company.id
+				);
+
+				break;
+			}
+			case GSEvent.ET_COMPANY_RENAMED: {
+				local event = GSEventCompanyRenamed.Convert(event);
+				local company_id = event.GetCompanyID()
+				local company = this.GetCompanyByID(company_id);
+				if(!company) {
+					break;
+				}
+				local company_name = event.GetNewName()
+				GSLeagueTable.UpdateElementData(
+					this.company_league_table_element_ids[company_id],
+					company_id,
+					company_name,
+					GSLeagueTable.LINK_COMPANY,
+					company_id
+				)
 				break;
 			}
 			case GSEvent.ET_VEHICLE_CRASHED: {
 				local crash = GSEventVehicleCrashed.Convert(event);
 				local victims = crash.GetVictims();
-				local companyid = crash.GetVehicleOwner();
-				local company = this.GetCompanyByID(companyid);
+				local company_id = crash.GetVehicleOwner();
+				local company = this.GetCompanyByID(company_id);
 				if(!company) {
 					break;
 				}
+				company.victims += victims;
+
+				// Update the league table
+				GSLeagueTable.UpdateElementScore(
+					this.company_league_table_element_ids[company.id],
+					company.victims,
+					"" + company.victims
+				);
+
 				break;
 			}
 
 		}
 	}
-}
-
-function MainClass::DailyLoop() {
-	GSLog.Info("DailyLoop");
-}
-
-function MainClass::MonthlyLoop() {
-GSLog.Info("MonthlyLoop");
-}
-
-function MainClass::YearlyLoop() {
-	GSLog.Info("YearlyLoop");
 }
 
 function MainClass::GetCompanyByID(id) {
@@ -142,23 +142,11 @@ function MainClass::GetCompanyByID(id) {
 	return null;
 }
 
-function MainClass::CompanyRemoveByID(companyid) {
-	for(local i = 0, size = this.companies.len(); i < size; i++) {
-		if(this.companies[i].id == companyid) {
-			this.companies.remove(i);
-			break;
-		}
-	}
-}
-
 function MainClass::Save() {
 	GSLog.Info("Saving data");
 	this.data = {
-		sv_last_month = this.last_month,
-		sv_last_year = this.last_year,
 		sv_companies = [],
 	};
-
 	foreach(company in this.companies){
 		this.data.sv_companies.append([company.id, company.victims]);
 	}
@@ -169,9 +157,7 @@ function MainClass::Save() {
 function MainClass::Load(version, tbl) {
 	GSLog.Info("Loading data");
 	foreach(key, val in tbl) {
-		if(key == "sv_last_month") this.last_month = val;
-		else if(key == "sv_last_year") this.last_year = val;
-		else if(key == "sv_companies") {
+		if(key == "sv_companies") {
 			foreach(company in val) {
 				this.companies.append( Company(company[0], company[1]) );
 			}
@@ -182,7 +168,7 @@ function MainClass::Load(version, tbl) {
 
 class Company
 {
-	id = INVALID_COMPANY;
+	id = 0xFF;
 	victims = 0;
 
 	constructor(id, victims = 0) {
