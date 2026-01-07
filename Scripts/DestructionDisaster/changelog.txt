@@ -1,3 +1,9 @@
+Version 2 (Jan 2026)
+ - Added more code comments
+ - Update info link
+ - Updated info description
+ - Fix Crash on save after bancrupt
+
 Version 1 (Jan 2026)
 - Crash victim tracking per company (vehicle crash event victims are attributed to the vehicle owner).
 - League Table scoreboard
